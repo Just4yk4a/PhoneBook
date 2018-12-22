@@ -1,0 +1,9 @@
+c:\users\yr160\source\repos\Phone boob\Phone boob\bin\Debug\Phone boob.exe
+c:\users\yr160\source\repos\Phone boob\Phone boob\bin\Debug\Phone boob.pdb
+c:\users\yr160\source\repos\Phone boob\Phone boob\obj\Debug\Phone boob.csprojResolveAssemblyReference.cache
+c:\users\yr160\source\repos\Phone boob\Phone boob\obj\Debug\Phone_boob.Form1.resources
+c:\users\yr160\source\repos\Phone boob\Phone boob\obj\Debug\Phone_boob.Properties.Resources.resources
+c:\users\yr160\source\repos\Phone boob\Phone boob\obj\Debug\Phone boob.csproj.GenerateResource.Cache
+c:\users\yr160\source\repos\Phone boob\Phone boob\obj\Debug\Phone boob.csproj.CoreCompileInputs.cache
+c:\users\yr160\source\repos\Phone boob\Phone boob\obj\Debug\Phone boob.exe
+c:\users\yr160\source\repos\Phone boob\Phone boob\obj\Debug\Phone boob.pdb
