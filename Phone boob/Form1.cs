@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Phone_boob
@@ -54,6 +55,7 @@ namespace Phone_boob
                 if (MessageBox.Show("Вы действительно хотите удалить эту запись?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     phoneBookBindingSource.RemoveCurrent();
+                    App.PhoneBook.WriteXml(string.Format("{0}//data.dat", Application.StartupPath));
                 }
             }
         }
@@ -126,13 +128,47 @@ namespace Phone_boob
                 App.PhoneBook.WriteXml(string.Format("{0}//data.dat", Application.StartupPath));
                 panel1.Enabled = false;
                 btnNew.Enabled = true;
-                btnSave.Enabled = true;
+                btnSave.Enabled = false;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 App.PhoneBook.RejectChanges();
             }
+        }
+
+        private void txtEmail_Validating(object sender, CancelEventArgs e)
+        {
+            Regex regex = new Regex(@"^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$");
+            if (!regex.IsMatch(txtEmail.Text) && txtEmail.Text.Length != 0)
+            {
+                txtEmail.ForeColor = Color.Red;
+                MessageBox.Show("Invalid mail address!");
+            }
+            else
+            {
+                btnSave.Enabled = true;
+                txtEmail.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtPhoneNumber_Validating(object sender, CancelEventArgs e)
+        {
+            Regex regex = new Regex(@"^\+*[0-9]+$");
+            if (!regex.IsMatch(txtPhoneNumber.Text) && txtEmail.Text.Length == 0)
+            {
+                txtPhoneNumber.ForeColor = Color.Red;
+                MessageBox.Show("Write or correct phone number!");
+            }
+            else
+            {
+                txtPhoneNumber.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtName_Validating(object sender, CancelEventArgs e)
+        {
+
         }
     }
 }
