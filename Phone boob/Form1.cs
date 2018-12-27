@@ -66,12 +66,17 @@ namespace Phone_boob
                 if (!string.IsNullOrEmpty(txtSearch.Text))
                 {
                     var query = from o in App.PhoneBook
-                                where o.PhoneNumber == txtSearch.Text || o.Name.Contains(txtSearch.Text) || o.Email.Contains(txtSearch.Text)
+                                where (o.PhoneNumber == txtSearch.Text || o.Name.Contains(txtSearch.Text) || o.Email.Contains(txtSearch.Text)) && (favourites.Checked ? o.isFavourite : (o.isFavourite || !o.isFavourite))
                                 select o;
                     dataGridView.DataSource = query.ToList();
                 }
                 else
-                    dataGridView.DataSource = phoneBookBindingSource;
+                {
+                    var query = from o in App.PhoneBook
+                                where favourites.Checked ? o.isFavourite : (o.isFavourite || !o.isFavourite)
+                                select o;
+                    dataGridView.DataSource = query.ToList();
+                }
         }
 
         private void btnNew_Click(object sender, EventArgs e)
@@ -96,7 +101,6 @@ namespace Phone_boob
         {
             btnSave.Enabled = true;
             panel1.Enabled = true;
-            txtPhoneNumber.Focus();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -169,6 +173,14 @@ namespace Phone_boob
         private void txtName_Validating(object sender, CancelEventArgs e)
         {
 
+        }
+
+        private void favourites_CheckedChanged(object sender, EventArgs e)
+        {
+            var query = from o in App.PhoneBook
+                        where (o.PhoneNumber == txtSearch.Text || o.Name.Contains(txtSearch.Text) || o.Email.Contains(txtSearch.Text)) && (favourites.Checked ? o.isFavourite : (o.isFavourite || !o.isFavourite))
+                        select o;
+            dataGridView.DataSource = query.ToList();
         }
     }
 }

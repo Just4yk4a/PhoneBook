@@ -6,6 +6,7 @@
     <Email>irina@gmail.com</Email>
     <Address>г. Гродно ул. Советская, 27 кв. 35</Address>
     <ID>-1</ID>
+    <isFavourite>false</isFavourite>
   </PhoneBook>
   <PhoneBook>
     <PhoneNumber>+375291525234</PhoneNumber>
@@ -13,5 +14,14 @@
     <Email>igor@mail.ru</Email>
     <Address>г.Минск, ул. Матросова, 12, кв.44</Address>
     <ID>-2</ID>
+    <isFavourite>false</isFavourite>
+  </PhoneBook>
+  <PhoneBook>
+    <PhoneNumber>+375295129043</PhoneNumber>
+    <Name>Евгений</Name>
+    <Email>yr1605@mail.ru</Email>
+    <Address />
+    <ID>-3</ID>
+    <isFavourite>true</isFavourite>
   </PhoneBook>
 </AppData>

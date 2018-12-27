@@ -289,6 +289,8 @@ namespace Phone_boob {
             
             private global::System.Data.DataColumn columnID;
             
+            private global::System.Data.DataColumn columnisFavourite;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public PhoneBookDataTable() {
@@ -364,6 +366,14 @@ namespace Phone_boob {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public global::System.Data.DataColumn isFavouriteColumn {
+                get {
+                    return this.columnisFavourite;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -399,14 +409,15 @@ namespace Phone_boob {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public PhoneBookRow AddPhoneBookRow(string PhoneNumber, string Name, string Email, string Address) {
+            public PhoneBookRow AddPhoneBookRow(string PhoneNumber, string Name, string Email, string Address, bool isFavourite) {
                 PhoneBookRow rowPhoneBookRow = ((PhoneBookRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         PhoneNumber,
                         Name,
                         Email,
                         Address,
-                        null};
+                        null,
+                        isFavourite};
                 rowPhoneBookRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowPhoneBookRow);
                 return rowPhoneBookRow;
@@ -441,6 +452,7 @@ namespace Phone_boob {
                 this.columnEmail = base.Columns["Email"];
                 this.columnAddress = base.Columns["Address"];
                 this.columnID = base.Columns["ID"];
+                this.columnisFavourite = base.Columns["isFavourite"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -456,13 +468,21 @@ namespace Phone_boob {
                 base.Columns.Add(this.columnAddress);
                 this.columnID = new global::System.Data.DataColumn("ID", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnID);
+                this.columnisFavourite = new global::System.Data.DataColumn("isFavourite", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnisFavourite);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("PhoneBookKey", new global::System.Data.DataColumn[] {
                                 this.columnID}, true));
+                this.columnEmail.AllowDBNull = false;
+                this.columnEmail.DefaultValue = ((string)(""));
+                this.columnAddress.AllowDBNull = false;
+                this.columnAddress.DefaultValue = ((string)(""));
                 this.columnID.AutoIncrement = true;
                 this.columnID.AutoIncrementSeed = -1;
                 this.columnID.AutoIncrementStep = -1;
                 this.columnID.AllowDBNull = false;
                 this.columnID.Unique = true;
+                this.columnisFavourite.AllowDBNull = false;
+                this.columnisFavourite.DefaultValue = ((bool)(true));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -639,12 +659,7 @@ namespace Phone_boob {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public string Email {
                 get {
-                    try {
-                        return ((string)(this[this.tablePhoneBook.EmailColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Email\' in table \'PhoneBook\' is DBNull.", e);
-                    }
+                    return ((string)(this[this.tablePhoneBook.EmailColumn]));
                 }
                 set {
                     this[this.tablePhoneBook.EmailColumn] = value;
@@ -655,12 +670,7 @@ namespace Phone_boob {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public string Address {
                 get {
-                    try {
-                        return ((string)(this[this.tablePhoneBook.AddressColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Address\' in table \'PhoneBook\' is DBNull.", e);
-                    }
+                    return ((string)(this[this.tablePhoneBook.AddressColumn]));
                 }
                 set {
                     this[this.tablePhoneBook.AddressColumn] = value;
@@ -675,6 +685,17 @@ namespace Phone_boob {
                 }
                 set {
                     this[this.tablePhoneBook.IDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public bool isFavourite {
+                get {
+                    return ((bool)(this[this.tablePhoneBook.isFavouriteColumn]));
+                }
+                set {
+                    this[this.tablePhoneBook.isFavouriteColumn] = value;
                 }
             }
             
@@ -700,30 +721,6 @@ namespace Phone_boob {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public void SetNameNull() {
                 this[this.tablePhoneBook.NameColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsEmailNull() {
-                return this.IsNull(this.tablePhoneBook.EmailColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetEmailNull() {
-                this[this.tablePhoneBook.EmailColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public bool IsAddressNull() {
-                return this.IsNull(this.tablePhoneBook.AddressColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void SetAddressNull() {
-                this[this.tablePhoneBook.AddressColumn] = global::System.Convert.DBNull;
             }
         }
         
