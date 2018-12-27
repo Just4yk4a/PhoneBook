@@ -14,4 +14,10 @@
     <Address>г.Минск, ул. Матросова, 12, кв.44</Address>
     <ID>-2</ID>
   </PhoneBook>
+  <PhoneBook>
+    <PhoneNumber>123123</PhoneNumber>
+    <Name>23123</Name>
+    <Email>12313</Email>
+    <ID>-4</ID>
+  </PhoneBook>
 </AppData>

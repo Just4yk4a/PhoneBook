@@ -29,10 +29,55 @@ namespace Phone_boob
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                string fileName = string.Format("{0}//data.dat", Application.StartupPath);
+                if (File.Exists(fileName))
+                    App.PhoneBook.ReadXml(fileName);
+                phoneBookBindingSource.DataSource = App.PhoneBook;
+                btnSave.Enabled = false;
+                panel1.Enabled = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                App.PhoneBook.RejectChanges();
+            }
+        }
+
+        private void dataGridView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                if (MessageBox.Show("Вы действительно хотите удалить эту запись?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    phoneBookBindingSource.RemoveCurrent();
+                }
+            }
+        }
+
+        private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
+                if (!string.IsNullOrEmpty(txtSearch.Text))
+                {
+                    var query = from o in App.PhoneBook
+                                where o.PhoneNumber == txtSearch.Text || o.Name.Contains(txtSearch.Text) || o.Email.Contains(txtSearch.Text)
+                                select o;
+                    dataGridView.DataSource = query.ToList();
+                }
+                else
+                    dataGridView.DataSource = phoneBookBindingSource;
+        }
+
         private void btnNew_Click(object sender, EventArgs e)
         {
             try
             {
+                btnNew.Enabled = false;
+                btnSave.Enabled = true;
                 panel1.Enabled = true;
                 App.PhoneBook.AddPhoneBookRow(App.PhoneBook.NewPhoneBookRow());
                 phoneBookBindingSource.MoveLast();
@@ -47,14 +92,29 @@ namespace Phone_boob
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
+            btnSave.Enabled = true;
             panel1.Enabled = true;
             txtPhoneNumber.Focus();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            phoneBookBindingSource.ResetBindings(false);
-            panel1.Enabled = false;
+            try
+            {
+                if (btnNew.Enabled == false)
+                {
+                    App.PhoneBook.RemovePhoneBookRow(App.PhoneBook[App.PhoneBook.Count() - 1]);
+                    btnNew.Enabled = true;
+                    btnSave.Enabled = false;
+                }
+                phoneBookBindingSource.ResetBindings(false);
+                panel1.Enabled = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                App.PhoneBook.RejectChanges();
+            }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -65,47 +125,14 @@ namespace Phone_boob
                 App.PhoneBook.AcceptChanges();
                 App.PhoneBook.WriteXml(string.Format("{0}//data.dat", Application.StartupPath));
                 panel1.Enabled = false;
+                btnNew.Enabled = true;
+                btnSave.Enabled = true;
             }
-
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 App.PhoneBook.RejectChanges();
             }
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            string fileName = string.Format("{0}//data.dat", Application.StartupPath);
-            if (File.Exists(fileName))
-                App.PhoneBook.ReadXml(fileName);
-            phoneBookBindingSource.DataSource = App.PhoneBook;
-            panel1.Enabled = false;
-        }
-
-        private void dataGridView_KeyDown(object sender, KeyEventArgs e)
-        {
-            if(e.KeyCode == Keys.Delete)
-            {
-                if(MessageBox.Show("Вы действительно хотите удалить эту запись?","Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    phoneBookBindingSource.RemoveCurrent();
-                }
-            }
-        }
-
-        private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if(e.KeyChar == (char)13)
-            if (!string.IsNullOrEmpty(txtSearch.Text))
-            {
-                var query = from o in App.PhoneBook
-                            where o.PhoneNumber == txtSearch.Text || o.Name.Contains(txtSearch.Text) || o.Email.Contains(txtSearch.Text)
-                            select o;
-                dataGridView.DataSource = query.ToList();
-            }
-            else
-                dataGridView.DataSource = phoneBookBindingSource;
         }
     }
 }

@@ -7,3 +7,12 @@ c:\users\yr160\source\repos\Phone boob\Phone boob\obj\Debug\Phone boob.csproj.Ge
 c:\users\yr160\source\repos\Phone boob\Phone boob\obj\Debug\Phone boob.csproj.CoreCompileInputs.cache
 c:\users\yr160\source\repos\Phone boob\Phone boob\obj\Debug\Phone boob.exe
 c:\users\yr160\source\repos\Phone boob\Phone boob\obj\Debug\Phone boob.pdb
+D:\c#\PhoneBook\Phone boob\bin\Debug\Phone boob.exe
+D:\c#\PhoneBook\Phone boob\bin\Debug\Phone boob.pdb
+D:\c#\PhoneBook\Phone boob\obj\Debug\Phone boob.csprojResolveAssemblyReference.cache
+D:\c#\PhoneBook\Phone boob\obj\Debug\Phone_boob.Form1.resources
+D:\c#\PhoneBook\Phone boob\obj\Debug\Phone_boob.Properties.Resources.resources
+D:\c#\PhoneBook\Phone boob\obj\Debug\Phone boob.csproj.GenerateResource.Cache
+D:\c#\PhoneBook\Phone boob\obj\Debug\Phone boob.csproj.CoreCompileInputs.cache
+D:\c#\PhoneBook\Phone boob\obj\Debug\Phone boob.exe
+D:\c#\PhoneBook\Phone boob\obj\Debug\Phone boob.pdb
